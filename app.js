@@ -30,9 +30,11 @@ async function initializeApp() {
     console.log('Adatbázis kapcsolat létrejött.');
 
     // Táblák létrehozása a modell alapján, ha még nem léteznek.
-    // Figyelem: A { force: true } minden indításnál ÚJRAHOZZA a táblákat! 
     // Fejlesztés elején hasznos, éles környezetben SOHA!
-    await sequelize.sync({ force: false }); 
+    await sequelize.sync({
+//       force: false, // Minden indításnál újrahozza a táblákat
+       alter: true // Megpróbálja szinkronban tartani a táblákat a modellekkel anélkül, hogy törölné az adatokat
+    }); 
     console.log("Minden modell szinkronizálva az adatbázissal.");
 
     // Szerver indítása
