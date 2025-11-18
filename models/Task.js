@@ -1,25 +1,45 @@
-const { DataTypes } = require('sequelize');
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
     id: {
       type: DataTypes.INTEGER,
-      autoIncrement: true,
       primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
     },
-    task: {
+    title: {
       type: DataTypes.STRING,
-      allowNull: false, // Az oszlop nem lehet null
+      allowNull: false
     },
-    // Hozzáadhatunk egy "completed" mezőt is:
-    completed: {
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    isDone: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
+    },
+    // Idegen kulcs mező, ami a User-re hivatkozik
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false, // Egy Task-nak mindig lennie kell szerzőjének
+      // A reláció definíciója:
+      references: {
+        model: 'User', // A modell neve, amire hivatkozunk
+        key: 'id'      // A hivatkozott kulcs a User táblában
+      }
     }
   }, {
-    // Ezzel kikapcsoljuk az automatikus 'createdAt' és 'updatedAt' mezők létrehozását
-    timestamps: false 
+    // További modell beállítások (pl. tableName: 'tasks')
   });
+
+  // Itt definiáljuk a relációt.
+  Task.associate = function(models) {
+    // Egy Task egy User-hez tartozik (Many-to-One)
+    Task.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'author' // Ezt az alias-t használjuk az include-oknál
+    });
+  };
 
   return Task;
 };

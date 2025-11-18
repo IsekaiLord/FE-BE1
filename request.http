@@ -3,7 +3,7 @@ POST http://localhost:3000/tasks
 Content-Type: application/json
 
 {
-    "task": "Növeld a Node.js tudásomat!"
+    "task": "negyedik"
 }
 
 ### GET kérés az összes feladat lekérdezésére
