@@ -4,8 +4,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "email": "user3@server.com",
-    "name": "user3"
+    "email": "user4@server.com",
+    "name": "user4"
 }
 
 ### --------------------------------------------------
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "title": "Vegyél tejet",
    "description": "2,8%-os",
-    "userId": 1
+    "userId": 2
 }
 
 ### --------------------------------------------------
@@ -31,7 +31,7 @@ Content-Type: application/json
 {
     "title": "Házi feladat",
    "description": "Csináld meg!",
-    "userId": 2
+    "userId": 3
 }
 
 ### --------------------------------------------------
@@ -53,4 +53,4 @@ DELETE http://localhost:3000/tasks/2
 
 ### Felhasználó törlése (és a hozzá tartozó feladatoké)
 # FONTOS: Cseréld le a '2'-est a törölni kívánt felhasználó valós ID-jára!
-DELETE http://localhost:3000/users/1
+DELETE http://localhost:3000/users/3

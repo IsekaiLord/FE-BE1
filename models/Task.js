@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     // Idegen kulcs mező, ami a User-re hivatkozik
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false, // Egy Task-nak mindig lennie kell szerzőjének
+      allowNull: true, // Egy Task-nak mindig lennie kell szerzőjének
       // A reláció definíciója:
       references: { // A reláció definíciója:
         model: 'Users', // A tábla neve, amire hivatkozunk (alapértelmezetten a modell neve többes számban)

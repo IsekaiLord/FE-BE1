@@ -44,7 +44,7 @@ router.delete('/:id', async (req, res) => {
     // automatikusan törli a felhasználóhoz tartozó összes feladatot is.
     await user.destroy();
 
-    res.status(200).json({ message: `A(z) ${id} ID-jú felhasználó és az összes hozzá tartozó feladat sikeresen törölve.` });
+    res.status(200).json({ message: `A(z) ${id} ID-jú felhasználó törölve és az összes hozzá tartozó feladat NULL-lal jelölve.` });
   } catch (error) {
     console.error('Hiba a felhasználó törlésekor:', error);
     res.status(500).json({ error: 'Szerveroldali hiba a törlés során.' });

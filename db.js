@@ -31,7 +31,7 @@ Object.keys(models).forEach(modelName => {
 models.User.hasMany(models.Task, { foreignKey: 'userId' });
 models.Task.belongsTo(models.User, {
   foreignKey: 'userId',
-  onDelete: 'CASCADE' // Ha egy User törlődik, a hozzá tartozó Task-ok is törlődjenek.
+  onDelete: 'SET NULL' // Ha egy User törlődik, a hozzá tartozó Task-okba NULL kerül.
 });
 
 // 6. Adatbázis Szinkronizálása
