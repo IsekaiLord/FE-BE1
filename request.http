@@ -4,9 +4,9 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "email": "user20@server.com",
-    "name": "user20",
-    "password": "user2_pwd"
+    "email": "user23@server.com",
+    "name": "user23",
+    "password": "user23_pwd"
 
 }
 

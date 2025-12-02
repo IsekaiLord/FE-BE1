@@ -3,14 +3,14 @@ const userService = require('../services/userService');
 // POST /users - Új felhasználó létrehozása
 const createUser = async (req, res) => {
   try {
-    if (!req.body.email) {
-      return res.status(400).json({ error: 'Az "email" mező kitöltése kötelező.' });
+    if (!req.body.email || !req.body.password) { // Hozzáadtuk a jelszó ellenőrzését is
+      return res.status(400).json({ error: 'Az "email" és "password" mezők kitöltése kötelező.' });
     }
-    const newUser = await userService.createUser(req.body);
+    const newUser = await userService.registerUser(req.body); // A registerUser függvényt hívjuk meg
     res.status(201).json(newUser);
   } catch (error) {
     console.error('Hiba az új user létrehozásakor:', error);
-    res.status(500).json({ error: 'Szerveroldali hiba.' });
+    res.status(error.statusCode || 500).json({ error: error.message || 'Szerveroldali hiba.' }); // Frissített hibakezelés
   }
 };
 
@@ -57,7 +57,7 @@ const register = async (req, res) => {
       res.status(201).json(newUser);
     } catch (error) {
       console.error('Hiba az új user létrehozásakor:', error);
-      res.status(500).json({ error: 'Szerveroldali hiba.' });
+      res.status(error.statusCode || 500).json({ error: error.message || 'Szerveroldali hiba.' });
     }
   };
 
