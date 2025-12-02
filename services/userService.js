@@ -1,9 +1,12 @@
 const userRepository = require('../repositories/userRepository');
+const bcrypt = require('bcrypt');
 
-const registerUser = (userData) => {
-  // Itt lehetne a jövőben a jelszó titkosítása vagy egyéb regisztrációs logika
+const registerUser = async (userData) => {
+  // Jelszó titkosítása bcrypt-tal
   const { email, name, password } = userData;
-  return userRepository.create({ email, name, password });
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  return userRepository.create({ email, name, password: hashedPassword });
 };
 
 const createUser = (userData) => {
