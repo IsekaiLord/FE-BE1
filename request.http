@@ -4,11 +4,12 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-    "email": "user24@server.com",
-    "name": "user24",
+    "email": "",
+    "name": "",
     "password": "user23_pwd"
 
 }
+//    "password": "user23_pwd"
 
 ### --------------------------------------------------
 
