@@ -7,7 +7,9 @@ const registerUser = async (userData) => {
   const { email, name, password } = userData;
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  return userRepository.create({ email, name, password: hashedPassword });
+  // Allow setting isAdmin when provided (useful for local/dev admin creation)
+  const isAdmin = userData.isAdmin === true || userData.isAdmin === 'true' ? true : false;
+  return userRepository.create({ email, name, password: hashedPassword, isAdmin });
 };
 
 // --- MÓDOSÍTÁS KEZDETE ---
